@@ -9,23 +9,30 @@ public class RobotOrientationBuild {
         return new RobotOrientationBuild();
     }
 
-    public RobotOrientationBuild move(char command) {
+    public RobotOrientationBuild move(char command) throws RobotOrientationException {
         if (command == 'M') {
+            int currentX = robotOrientation.getCurrentX();
+            int currentY = robotOrientation.getCurrentY();
             switch (robotOrientation.getOrientation()) {
                 case N :
-                    robotOrientation.setCurrentY(robotOrientation.getCurrentY() + 1);
+                    robotOrientation.setCurrentY(currentY + 1);
                     break;
                 case S :
-                    robotOrientation.setCurrentY(robotOrientation.getCurrentY() - 1);
+                    robotOrientation.setCurrentY(currentY - 1);
                     break;
                 case E :
-                    robotOrientation.setCurrentX(robotOrientation.getCurrentX() + 1);
+                    robotOrientation.setCurrentX(currentX + 1);
                     break;
                 case W :
-                    robotOrientation.setCurrentX(robotOrientation.getCurrentX() - 1);
+                    robotOrientation.setCurrentX(currentX - 1);
                     break;
                 default :
                     break;
+            }
+            if (currentX > RobotOrientation.MAX_X || currentY > RobotOrientation.MAX_Y) {
+                throw new RobotOrientationException(
+                                "Enviado comando de deslocamento que ultrapassa os limites permitidos ("
+                                                + RobotOrientation.MAX_X + ", " + RobotOrientation.MAX_Y + ")");
             }
         } else {
             switch (command) {

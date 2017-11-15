@@ -35,13 +35,18 @@ public class MoveRobotsController {
         if (isValidCommand) {
             RobotOrientationBuild robotBuild = RobotOrientationBuild.newInstance();
             IntStream streamProcessing = filterPosition.chars();
-            streamProcessing.forEach(s -> robotBuild.move((char) s));
-            RobotOrientation robotOrientation = robotBuild.getRobotOrientation();
-            if (isValidPosition(robotOrientation)) {
-                robotBuild.build();
-                response = ResponseEntity.ok(getFormattedAcceptResponse(robotOrientation));
-            } else {
-                response = badRequestResponse;
+            try {
+                streamProcessing.forEach(s -> robotBuild.move((char) s));
+                RobotOrientation robotOrientation = robotBuild.getRobotOrientation();
+                if (isValidPosition(robotOrientation)) {
+                    robotBuild.build();
+                    response = ResponseEntity.ok(getFormattedAcceptResponse(robotOrientation));
+                } else {
+                    response = badRequestResponse;
+                }
+            } catch (RobotOrientationException e) {
+                response = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(getBadRequestResponse() + " - " + e.getMessage());
             }
         }
         return response;
@@ -58,9 +63,9 @@ public class MoveRobotsController {
 
     private boolean isValidPosition(RobotOrientation robotOrientation) {
         return (robotOrientation.getCurrentX() >= RobotOrientation.MIN_X
-                        || robotOrientation.getCurrentX() <= RobotOrientation.MAX_X)
-                        || (robotOrientation.getCurrentY() >= RobotOrientation.MIN_Y
-                                        || robotOrientation.getCurrentY() <= RobotOrientation.MAX_Y);
+                        && robotOrientation.getCurrentX() <= RobotOrientation.MAX_X)
+                        && (robotOrientation.getCurrentY() >= RobotOrientation.MIN_Y
+                                        && robotOrientation.getCurrentY() <= RobotOrientation.MAX_Y);
     }
 
 }
