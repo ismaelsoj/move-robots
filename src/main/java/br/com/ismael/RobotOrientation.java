@@ -3,8 +3,12 @@ package br.com.ismael;
 public class RobotOrientation {
 
     private RobotOrientationEnum orientation;
-    private int currentX = 0;
-    private int currentY = 0;
+    public static final Integer MIN_X = 0;
+    public static final Integer MIN_Y = 0;
+    public static final Integer MAX_X = 5;
+    public static final Integer MAX_Y = 5;
+    private int currentX = MIN_X;
+    private int currentY = MIN_Y;
 
     public RobotOrientation(RobotOrientationEnum initialOrientation, int initialX, int initialY) {
         this.orientation = initialOrientation;

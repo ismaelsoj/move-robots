@@ -2,7 +2,8 @@ package br.com.ismael;
 
 public class RobotOrientationBuild {
 
-    private RobotOrientation robotOrientation = new RobotOrientation(RobotOrientationEnum.N, 0, 0);
+    private RobotOrientation robotOrientation = new RobotOrientation(RobotOrientationEnum.N, RobotOrientation.MIN_X,
+                    RobotOrientation.MIN_Y);
 
     public static RobotOrientationBuild newInstance() {
         return new RobotOrientationBuild();
