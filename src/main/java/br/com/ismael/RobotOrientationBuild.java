@@ -27,10 +27,15 @@ public class RobotOrientationBuild {
                     break;
             }
         } else {
-            if (command == 'L') {
-                robotOrientation.setOrientation(robotOrientation.getOrientation().toLeft());
-            } else if (command == 'R') {
-                robotOrientation.setOrientation(robotOrientation.getOrientation().toRight());
+            switch (command) {
+                case 'L' :
+                    robotOrientation.setOrientation(robotOrientation.getOrientation().toLeft());
+                    break;
+                case 'R' :
+                    robotOrientation.setOrientation(robotOrientation.getOrientation().toRight());
+                    break;
+                default :
+                    break;
             }
         }
         setRobotOrientation(robotOrientation);
