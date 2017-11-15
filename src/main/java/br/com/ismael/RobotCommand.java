@@ -1,6 +1,12 @@
 package br.com.ismael;
 
-public class RobotOrientation {
+/**
+ * Bean responsável por armazenar a posição atual de um robô.
+ * 
+ * @author Ismael Júnior
+ *
+ */
+public class RobotCommand {
 
     private RobotOrientationEnum orientation;
     public static final Integer MIN_X = 0;
@@ -10,7 +16,7 @@ public class RobotOrientation {
     private int currentX = MIN_X;
     private int currentY = MIN_Y;
 
-    public RobotOrientation(RobotOrientationEnum initialOrientation, int initialX, int initialY) {
+    public RobotCommand(RobotOrientationEnum initialOrientation, int initialX, int initialY) {
         this.orientation = initialOrientation;
         this.currentX = initialX;
         this.currentY = initialY;
